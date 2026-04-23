@@ -16,15 +16,6 @@ clamp(value, min, max)
     return value;
 }
 
-projectPointOnLine(a, b, p)
-{
-    ap = p - a;
-    ab = b - a;
-    if ( a == b )
-        return p;
-    return a + vectorScale(ab, vectorDot(ap, ab) / vectorDot(ab, ab));
-}
-
 getNearestPlayers(maxCount)
 {
     players = getEntArray("player", "classname");
@@ -369,7 +360,7 @@ main()
 
         // Angle
         angle = self.angles[1] - 90;
-        if(angle <= 0)
+        if ( angle <= 0 )
             angle += 360;
 
         cosA = cos(angle);
@@ -706,7 +697,7 @@ updateMinimapIcons(nearest, minX, maxY, sizeX, sizeY, mapSize, clampedX, clamped
                                 self.mmIcons[i] setShader("zk_minimap_enemy", minimap_other_players_size, minimap_other_players_size);
                                 if ( p.detected < getTime() + 1000 )
                                 {
-                                    // Cannot use FadeOverTime here as it would be overriden by setShader
+                                    // Cannot use fadeOverTime here as it would be overriden by setShader
                                     self.mmIcons[i].alpha = (p.detected - getTime()) / 1000;
                                 }
                                 else
